@@ -9,6 +9,8 @@ import test.BaseTest;
 
 import static io.restassured.RestAssured.given;
 
+//import org.hamcrest.Matchers;
+
 /**
  * Проверяются нужные параметры в ответе из бъекта forecasts
  *
@@ -55,7 +57,7 @@ public class ForecastsResponseTest extends BaseTest {
                 .when().get(simpleRequestForMoscow + "&limit=1")
                 .then().log().all()
                 .statusCode(HttpStatus.SC_OK)
-                .assertThat().body("forecasts.moon_code", Matchers.oneOf(moonCodes))
-                .assertThat().body("forecasts.moon_text", Matchers.oneOf(moonTexts));
+                .assertThat().body("forecasts.moon_code", Matchers.isOneOf(moonCodes))
+                .assertThat().body("forecasts.moon_text", Matchers.isOneOf(moonTexts));
     }
 }
